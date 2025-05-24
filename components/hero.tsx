@@ -3,124 +3,102 @@
 import { useRef, useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { gsap } from "gsap"
-import { Anchor, Compass, Ship, Navigation } from "lucide-react"
-import OceanBackground from "./ocean-background"
-import CSSOceanFallback from "./css-ocean-fallback"
+import { Rocket, Stars, Navigation, Sparkles } from "lucide-react"
+import RealisticOceanBackground from "./realistic-ocean-background"
+import ModernOverlay from "./modern-overlay"
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null)
   const [isLoaded, setIsLoaded] = useState(false)
-  const [useThreeJS, setUseThreeJS] = useState(true)
 
   useEffect(() => {
     if (!containerRef.current) return
 
-    // Check if Three.js is available
-    try {
-      // Test if Three.js can create a basic scene
-      const THREE = (window as any).THREE
-      const testRenderer = THREE ? new THREE.WebGLRenderer({ alpha: true }) : null
-      if (!testRenderer) {
-        setUseThreeJS(false)
-      } else {
-        testRenderer.dispose()
-      }
-    } catch (error) {
-      console.log("Three.js not available, using CSS fallback")
-      setUseThreeJS(false)
+    // Check if WebGL2 is supported
+    const testCanvas = document.createElement('canvas');
+    if (!testCanvas.getContext('webgl2')) {
+      console.log("WebGL2 not supported, consider a fallback.");
     }
 
-    // Text animations
-    const animateText = () => {
-      const title = document.querySelector(".hero-title")
-      const subtitle = document.querySelector(".hero-subtitle")
-      const buttons = document.querySelectorAll(".hero-button")
-      const icons = document.querySelectorAll(".hero-icon")
+    // Animation setup
+    const ctx = gsap.context(() => {
+      gsap.from(".hero-title", {
+        y: 100,
+        opacity: 0,
+        duration: 1,
+        ease: "power4.out",
+      })
 
-      gsap.fromTo(title, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "power3.out" })
+      gsap.from(".hero-description", {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        delay: 0.3,
+        ease: "power4.out",
+      })
 
-      gsap.fromTo(subtitle, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 1, delay: 0.3, ease: "power3.out" })
+      gsap.from(".hero-cta", {
+        y: 30,
+        opacity: 0,
+        duration: 1,
+        delay: 0.6,
+        ease: "power4.out",
+      })
+    }, containerRef)
 
-      gsap.fromTo(
-        buttons,
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, delay: 0.6, stagger: 0.2, ease: "power3.out" },
-      )
-
-      gsap.fromTo(
-        icons,
-        { scale: 0, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.5, delay: 1, stagger: 0.15, ease: "back.out(1.7)" },
-      )
-    }
-
-    setTimeout(animateText, 500)
     setIsLoaded(true)
+
+    return () => {
+      ctx.revert()
+    }
   }, [])
 
   return (
-    <div className="relative w-full h-screen overflow-hidden">
-      {/* Ocean Background - Three.js or CSS fallback */}
-      {useThreeJS ? <OceanBackground /> : <CSSOceanFallback />}
+    <div className="relative w-full h-screen overflow-hidden aurora-bg">
+      {/* Ocean Background */}
+      {isLoaded && <RealisticOceanBackground />}
+      
+      {/* Modern UI Overlay */}
+      {isLoaded && <ModernOverlay />}
 
       {/* Content overlay */}
       <div className="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center">
-        <div className="max-w-3xl">
-          <div className="flex items-center mb-6 space-x-4">
-            <div className="flex space-x-3">
-              <div className="hero-icon bg-black-900/80 backdrop-blur-sm p-3 rounded-full">
-                <Anchor className="h-6 w-6 text-orange-500" />
-              </div>
-              <div className="hero-icon bg-black-900/80 backdrop-blur-sm p-3 rounded-full">
-                <Ship className="h-6 w-6 text-orange-500" />
-              </div>
-              <div className="hero-icon bg-black-900/80 backdrop-blur-sm p-3 rounded-full">
-                <Compass className="h-6 w-6 text-orange-500 compass-animation" />
-              </div>
-              <div className="hero-icon bg-black-900/80 backdrop-blur-sm p-3 rounded-full">
-                <Navigation className="h-6 w-6 text-orange-500" />
-              </div>
-            </div>
-          </div>
-
-          <h1 className="hero-title text-5xl md:text-7xl font-bold mb-6 opacity-0 text-white drop-shadow-lg">
-            <span className="ocean-text-gradient">Oceanic</span> Excellence in Maritime Solutions
+        <div ref={containerRef} className="max-w-3xl">
+          <h1 className="hero-title text-4xl md:text-6xl font-bold mb-6 cosmic-text-gradient animate-holographic-shimmer">
+            Navigate the Future of Maritime Logistics
           </h1>
-
-          <p className="hero-subtitle text-xl md:text-2xl mb-8 opacity-0 text-white/90 max-w-2xl drop-shadow-md">
-            Expert maritime consultancy from Master Mariners and Chief Engineers with over two decades of experience
-            across all vessel types
+          <p className="hero-description text-xl md:text-2xl text-foreground/90 mb-8">
+            Streamline your shipping operations with our cutting-edge logistics platform
           </p>
-
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Button className="hero-button btn-orange opacity-0 text-base px-8 py-6 rounded-full shadow-lg">
-              Explore Our Services
+          <div className="hero-cta flex flex-col sm:flex-row gap-4">
+            <Button size="lg" className="btn-primary-cosmic">
+              <Rocket className="mr-2 h-5 w-5" />
+              Get Started
             </Button>
-            <Button className="hero-button bg-black-900/80 backdrop-blur-sm hover:bg-black-900 text-white border border-orange-500/30 opacity-0 text-base px-8 py-6 rounded-full shadow-lg">
-              Get a Consultation
+            <Button size="lg" className="btn-outline-cosmic">
+              <Stars className="mr-2 h-5 w-5" />
+              Learn More
             </Button>
-          </div>
-
-          {/* Floating stats */}
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-black-900/80 backdrop-blur-sm p-6 rounded-xl border-l-4 border-orange-500 transform transition-all duration-300 hover:translate-y-[-5px] hover:shadow-lg hover:border-l-8 shadow-xl">
-              <h3 className="text-4xl font-bold text-orange-500 mb-2">20+</h3>
-              <p className="text-white/80">Years of Experience</p>
-            </div>
-            <div className="bg-black-900/80 backdrop-blur-sm p-6 rounded-xl border-l-4 border-orange-500 transform transition-all duration-300 hover:translate-y-[-5px] hover:shadow-lg hover:border-l-8 shadow-xl">
-              <h3 className="text-4xl font-bold text-orange-500 mb-2">100+</h3>
-              <p className="text-white/80">Vessels Managed</p>
-            </div>
-            <div className="bg-black-900/80 backdrop-blur-sm p-6 rounded-xl border-l-4 border-orange-500 transform transition-all duration-300 hover:translate-y-[-5px] hover:shadow-lg hover:border-l-8 shadow-xl">
-              <h3 className="text-4xl font-bold text-orange-500 mb-2">24/7</h3>
-              <p className="text-white/80">Global Support</p>
-            </div>
           </div>
         </div>
       </div>
 
-      {/* Gradient overlay for better text readability */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black-900/50 via-black-900/30 to-black-900/20 z-[5]" />
+      {/* Cosmic Particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className="particle"
+            style={{
+              '--particle-x': `${Math.random() * 200 - 100}px`,
+              '--particle-y': `${Math.random() * -200 - 50}px`,
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`
+            } as React.CSSProperties}
+          />
+        ))}
+      </div>
     </div>
   )
 }

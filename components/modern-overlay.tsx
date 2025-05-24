@@ -1,0 +1,101 @@
+"use client"
+
+import { useEffect, useRef } from "react"
+import { motion } from "framer-motion"
+
+const ModernOverlay = () => {
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    // Add parallax effect to cards
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!containerRef.current) return
+      const cards = containerRef.current.querySelectorAll(".parallax-card")
+      const x = e.clientX / window.innerWidth
+      const y = e.clientY / window.innerHeight
+
+      cards.forEach((card) => {
+        const element = card as HTMLElement
+        const speed = parseFloat(element.dataset.speed || "0.05")
+        const xOffset = (x - 0.5) * speed * 100
+        const yOffset = (y - 0.5) * speed * 100
+        element.style.transform = `translate(${xOffset}px, ${yOffset}px)`
+      })
+    }
+
+    window.addEventListener("mousemove", handleMouseMove)
+    return () => window.removeEventListener("mousemove", handleMouseMove)
+  }, [])
+
+  return (
+    <div ref={containerRef} className="fixed inset-0 pointer-events-none">
+      {/* Cosmic gradient orbs */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-blob" />
+      <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-secondary/20 rounded-full blur-3xl animate-blob animation-delay-2000" />
+      <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-accent/20 rounded-full blur-3xl animate-blob animation-delay-4000" />
+
+      {/* Modern cards with cosmic glass effect */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        className="absolute top-1/4 left-1/4 parallax-card"
+        data-speed="0.05"
+      >
+        <div className="w-80 h-96 card-glass p-6 transform hover:scale-105 transition-all duration-300">
+          <div className="h-40 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-xl mb-4 glowing-border" />
+          <div className="space-y-3">
+            <div className="h-4 w-3/4 bg-primary/20 rounded-full" />
+            <div className="h-4 w-1/2 bg-secondary/20 rounded-full" />
+          </div>
+        </div>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+        className="absolute top-1/3 right-1/4 parallax-card"
+        data-speed="0.03"
+      >
+        <div className="w-72 h-80 card-glass p-6 transform hover:scale-105 transition-all duration-300">
+          <div className="h-32 bg-gradient-to-br from-secondary/20 to-accent/20 rounded-xl mb-4 glowing-border" />
+          <div className="space-y-3">
+            <div className="h-4 w-2/3 bg-secondary/20 rounded-full" />
+            <div className="h-4 w-1/2 bg-accent/20 rounded-full" />
+          </div>
+        </div>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.6 }}
+        className="absolute bottom-1/4 left-1/3 parallax-card"
+        data-speed="0.04"
+      >
+        <div className="w-64 h-72 card-glass p-6 transform hover:scale-105 transition-all duration-300">
+          <div className="h-28 bg-gradient-to-br from-accent/20 to-primary/20 rounded-xl mb-4 glowing-border" />
+          <div className="space-y-3">
+            <div className="h-4 w-3/4 bg-accent/20 rounded-full" />
+            <div className="h-4 w-1/2 bg-primary/20 rounded-full" />
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Cosmic rings */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96">
+        <div className="absolute inset-0 border border-primary/20 rounded-full animate-spin-slow mystical-rotate-animation" />
+        <div className="absolute inset-4 border border-secondary/20 rounded-full animate-spin-slow mystical-rotate-animation animation-delay-1000" />
+        <div className="absolute inset-8 border border-accent/20 rounded-full animate-spin-slow mystical-rotate-animation animation-delay-2000" />
+      </div>
+
+      {/* Energy ripples */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full">
+        <div className="energy-ripple" />
+      </div>
+    </div>
+  )
+}
+
+export default ModernOverlay 
