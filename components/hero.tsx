@@ -62,12 +62,13 @@ export default function Hero() {
       {isLoaded && <ModernOverlay />}
 
       {/* Content overlay */}
-      <div className="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center">
+      <div className="relative z-30 container mx-auto px-4 h-full flex flex-col justify-center">
         <div ref={containerRef} className="max-w-3xl">
-          <h1 className="hero-title text-4xl md:text-6xl font-bold mb-6 cosmic-text-gradient animate-holographic-shimmer">
+          <div className="absolute -inset-4 md:-inset-8 bg-black/40 backdrop-blur-md rounded-xl -z-10" />
+          <h1 className="hero-title text-4xl md:text-6xl font-bold mb-6 cosmic-text-gradient animate-holographic-shimmer drop-shadow-lg">
             Navigate the Future of Maritime Logistics
           </h1>
-          <p className="hero-description text-xl md:text-2xl text-foreground/90 mb-8">
+          <p className="hero-description text-xl md:text-2xl text-foreground/90 mb-8 drop-shadow-md">
             Streamline your shipping operations with our cutting-edge logistics platform
           </p>
           <div className="hero-cta flex flex-col sm:flex-row gap-4">

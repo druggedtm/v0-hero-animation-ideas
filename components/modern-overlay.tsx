@@ -39,7 +39,7 @@ const ModernOverlay = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className="absolute top-1/4 left-1/4 parallax-card"
+        className="absolute top-8 left-8 parallax-card z-10"
         data-speed="0.05"
       >
         <div className="w-80 h-96 card-glass p-6 transform hover:scale-105 transition-all duration-300">
@@ -55,7 +55,7 @@ const ModernOverlay = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.4 }}
-        className="absolute top-1/3 right-1/4 parallax-card"
+        className="absolute top-8 right-8 parallax-card z-10"
         data-speed="0.03"
       >
         <div className="w-72 h-80 card-glass p-6 transform hover:scale-105 transition-all duration-300">
@@ -71,7 +71,7 @@ const ModernOverlay = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.6 }}
-        className="absolute bottom-1/4 left-1/3 parallax-card"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 parallax-card z-10"
         data-speed="0.04"
       >
         <div className="w-64 h-72 card-glass p-6 transform hover:scale-105 transition-all duration-300">
