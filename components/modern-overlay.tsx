@@ -34,55 +34,6 @@ const ModernOverlay = () => {
       <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-secondary/20 rounded-full blur-3xl animate-blob animation-delay-2000" />
       <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-accent/20 rounded-full blur-3xl animate-blob animation-delay-4000" />
 
-      {/* Modern cards with cosmic glass effect */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        className="absolute top-8 left-8 parallax-card z-10"
-        data-speed="0.05"
-      >
-        <div className="w-80 h-96 card-glass p-6 transform hover:scale-105 transition-all duration-300">
-          <div className="h-40 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-xl mb-4 glowing-border" />
-          <div className="space-y-3">
-            <div className="h-4 w-3/4 bg-primary/20 rounded-full" />
-            <div className="h-4 w-1/2 bg-secondary/20 rounded-full" />
-          </div>
-        </div>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.4 }}
-        className="absolute top-8 right-8 parallax-card z-10"
-        data-speed="0.03"
-      >
-        <div className="w-72 h-80 card-glass p-6 transform hover:scale-105 transition-all duration-300">
-          <div className="h-32 bg-gradient-to-br from-secondary/20 to-accent/20 rounded-xl mb-4 glowing-border" />
-          <div className="space-y-3">
-            <div className="h-4 w-2/3 bg-secondary/20 rounded-full" />
-            <div className="h-4 w-1/2 bg-accent/20 rounded-full" />
-          </div>
-        </div>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.6 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 parallax-card z-10"
-        data-speed="0.04"
-      >
-        <div className="w-64 h-72 card-glass p-6 transform hover:scale-105 transition-all duration-300">
-          <div className="h-28 bg-gradient-to-br from-accent/20 to-primary/20 rounded-xl mb-4 glowing-border" />
-          <div className="space-y-3">
-            <div className="h-4 w-3/4 bg-accent/20 rounded-full" />
-            <div className="h-4 w-1/2 bg-primary/20 rounded-full" />
-          </div>
-        </div>
-      </motion.div>
-
       {/* Cosmic rings */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96">
         <div className="absolute inset-0 border border-primary/20 rounded-full animate-spin-slow mystical-rotate-animation" />

@@ -64,7 +64,6 @@ export default function Hero() {
       {/* Content overlay */}
       <div className="relative z-30 container mx-auto px-4 h-full flex flex-col justify-center">
         <div ref={containerRef} className="max-w-3xl">
-          <div className="absolute -inset-4 md:-inset-8 bg-black/40 backdrop-blur-md rounded-xl -z-10" />
           <h1 className="hero-title text-4xl md:text-6xl font-bold mb-6 cosmic-text-gradient animate-holographic-shimmer drop-shadow-lg">
             Navigate the Future of Maritime Logistics
           </h1>
