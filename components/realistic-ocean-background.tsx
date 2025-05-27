@@ -20,16 +20,17 @@ const RealisticOceanBackground = () => {
     }
 
     const shaderParams = {
-      CAMERA_SPEED: 0.2, // Slower for a background effect
-      MOUSE_SENSITIVITY: 0.02, // Reduced sensitivity
-      NUM_STEPS: 28,
-      ITER_GEOMETRY: 1,
+      CAMERA_SPEED: 0.2,
+      MOUSE_SENSITIVITY: 0.1,
+      NUM_STEPS: 40,
+      ITER_GEOMETRY: 3,
       ITER_FRAGMENT: 4,
-      SEA_HEIGHT: 0.7,
-      SEA_CHOPPY: 3.0,
-      SEA_SPEED: 0.4, // Slower sea movement
-      SEA_FREQ: 0.18,
+      SEA_HEIGHT: 0.4,
+      SEA_CHOPPY: 2.0,
+      SEA_SPEED: 0.2,
+      SEA_FREQ: 0.2
     }
+
 
     const vertexShaderSource = `#version 300 es
       in vec4 aPosition;
