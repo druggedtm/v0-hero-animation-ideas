@@ -20,7 +20,7 @@ const RealisticOceanBackground = () => {
     }
 
     const shaderParams = {
-      CAMERA_SPEED: 0.3, // Slower for a background effect
+      CAMERA_SPEED: 0.2, // Slower for a background effect
       MOUSE_SENSITIVITY: 0.02, // Reduced sensitivity
       NUM_STEPS: 28,
       ITER_GEOMETRY: 1,
@@ -317,7 +317,7 @@ const RealisticOceanBackground = () => {
       gl.uniform3f(resolutionUniformLocation!, gl.canvas.width, gl.canvas.height, 1.0)
       gl.uniform1f(timeUniformLocation!, currentTime)
       gl.uniform4f(mouseUniformLocation!, mouseX, mouseY, 0.0, 0.0)
-      
+
       gl.uniform1i(numStepsUniformLocation, shaderParams.NUM_STEPS)
       gl.uniform1i(geometryIterUniformLocation, shaderParams.ITER_GEOMETRY)
       gl.uniform1i(fragmentIterUniformLocation, shaderParams.ITER_FRAGMENT)
@@ -327,7 +327,7 @@ const RealisticOceanBackground = () => {
       gl.uniform1f(seaFreqUniformLocation, shaderParams.SEA_FREQ)
       gl.uniform1f(cameraSpeedUniformLocation, shaderParams.CAMERA_SPEED)
       gl.uniform1f(mouseSensitivityUniformLocation, shaderParams.MOUSE_SENSITIVITY)
-      
+
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
       animationFrameId.current = requestAnimationFrame(renderLoop)
     }
