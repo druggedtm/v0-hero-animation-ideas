@@ -4,6 +4,7 @@ import { useRef, useEffect } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { Mail, Phone, MapPin } from "lucide-react"
+import WaveCanvas from "./WaveCanvas"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -135,6 +136,12 @@ export default function ContactCTA() {
           </div>
         </div>
       </div>
+      {/* Wave Canvas Component */}
+      <div className="absolute inset-0 z-0">
+        <WaveCanvas />
+      </div>
+
     </section>
+
   )
 }
